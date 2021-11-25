@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "491060353364",
+    "project_id": "mappy-21f33",
+    "storage_bucket": "mappy-21f33.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:491060353364:android:ccdf7ae37735da9b0090c1",
+        "android_client_info": {
+          "package_name": "com.gmail.ivan.morozyk.mappy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "491060353364-v48ks2j9gi3dh08hln0it7fvrnsn1b92.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gmail.ivan.morozyk.mappy",
+            "certificate_hash": "e119eddc33968167a8bcfeaf56273edf6141d707"
+          }
+        },
+        {
+          "client_id": "491060353364-dntha4fvmoce2addl0ak9gfkg55nqtql.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUuYdjaEQI5-vcmqBY-2ot5CrzYoAqWlo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "491060353364-dntha4fvmoce2addl0ak9gfkg55nqtql.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
