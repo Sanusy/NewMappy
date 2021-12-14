@@ -5,7 +5,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class Navigator @Inject constructor() : NavigationManager, ComposeNavigationProvider {
+class Navigator @Inject constructor() : NavigationManager, NavigationProvider {
 
     private var navController: NavController? = null
 
@@ -17,7 +17,9 @@ class Navigator @Inject constructor() : NavigationManager, ComposeNavigationProv
         navController = null
     }
 
-    override fun navigate(screen: Screen) {
-        navController?.navigate(screen.route)
+    override fun navigate(screen: Screen, singleTop: Boolean) {
+        navController?.navigate(screen.route) {
+            launchSingleTop = singleTop
+        }
     }
 }

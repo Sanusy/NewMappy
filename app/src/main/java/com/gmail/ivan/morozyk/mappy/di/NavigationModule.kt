@@ -1,6 +1,6 @@
 package com.gmail.ivan.morozyk.mappy.di
 
-import com.gmail.ivan.morozyk.mappy.navigation.ComposeNavigationProvider
+import com.gmail.ivan.morozyk.mappy.navigation.NavigationProvider
 import com.gmail.ivan.morozyk.mappy.navigation.NavigationManager
 import com.gmail.ivan.morozyk.mappy.navigation.Navigator
 import dagger.Binds
@@ -16,5 +16,5 @@ abstract class NavigationModule {
     abstract fun bindNavigationManager(navigationManager: Navigator): NavigationManager
 
     @Binds
-    abstract fun bindComposeNavigationProvider(composeNavigationProvider: Navigator): ComposeNavigationProvider
+    abstract fun bindComposeNavigationProvider(composeNavigationProvider: Navigator): NavigationProvider
 }
