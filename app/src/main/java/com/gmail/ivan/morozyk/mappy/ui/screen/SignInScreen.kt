@@ -33,7 +33,9 @@ fun SignInScreen(signInViewModel: SignInViewModel) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             TextField(
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp).fillMaxWidth(),
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                    .fillMaxWidth(),
                 value = signInViewModel.emailState.value,
                 onValueChange = signInViewModel::onEmailChanged,
                 leadingIcon = { Icon(Icons.Default.Email, null) },
@@ -43,7 +45,9 @@ fun SignInScreen(signInViewModel: SignInViewModel) {
             )
 
             TextField(
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp).fillMaxWidth(),
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                    .fillMaxWidth(),
                 value = signInViewModel.passwordState.value,
                 onValueChange = signInViewModel::onPasswordChanged,
                 leadingIcon = { Icon(Icons.Default.Lock, null) },
@@ -63,7 +67,10 @@ fun SignInScreen(signInViewModel: SignInViewModel) {
                 modifier = Modifier.padding(8.dp),
                 onClick = signInViewModel::logInViaGoogle
             ) {
-                Image(painterResource(id = R.drawable.googleg_standard_color_18), contentDescription = null)
+                Image(
+                    painterResource(id = R.drawable.googleg_standard_color_18),
+                    contentDescription = null
+                )
             }
 
             Button(

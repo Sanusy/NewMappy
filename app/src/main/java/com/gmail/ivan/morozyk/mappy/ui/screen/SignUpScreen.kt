@@ -1,7 +1,5 @@
 package com.gmail.ivan.morozyk.mappy.ui.screen
 
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -13,7 +11,6 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -21,8 +18,6 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import com.gmail.ivan.morozyk.mappy.R
 import com.gmail.ivan.morozyk.mappy.viewmodel.SignUpViewModel
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
 @Composable
 fun SignUpScreen(signUpViewModel: SignUpViewModel) {
@@ -36,7 +31,9 @@ fun SignUpScreen(signUpViewModel: SignUpViewModel) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             TextField(
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp).fillMaxWidth(),
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                    .fillMaxWidth(),
                 value = signUpViewModel.uiState.value.name,
                 onValueChange = signUpViewModel::onNameChanged,
                 leadingIcon = { Icon(Icons.Default.Person, null) },
@@ -45,7 +42,9 @@ fun SignUpScreen(signUpViewModel: SignUpViewModel) {
             )
 
             TextField(
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp).fillMaxWidth(),
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                    .fillMaxWidth(),
                 value = signUpViewModel.uiState.value.email,
                 onValueChange = signUpViewModel::onEmailChanged,
                 leadingIcon = { Icon(Icons.Default.Email, null) },
@@ -55,7 +54,9 @@ fun SignUpScreen(signUpViewModel: SignUpViewModel) {
             )
 
             TextField(
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp).fillMaxWidth(),
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                    .fillMaxWidth(),
                 value = signUpViewModel.uiState.value.password,
                 onValueChange = signUpViewModel::onPasswordChanged,
                 leadingIcon = { Icon(Icons.Default.Lock, null) },

@@ -1,7 +1,7 @@
 package com.gmail.ivan.morozyk.mappy.di
 
-import com.gmail.ivan.morozyk.mappy.navigation.NavigationProvider
 import com.gmail.ivan.morozyk.mappy.navigation.NavigationManager
+import com.gmail.ivan.morozyk.mappy.navigation.NavigationProvider
 import com.gmail.ivan.morozyk.mappy.navigation.Navigator
 import dagger.Binds
 import dagger.Module
