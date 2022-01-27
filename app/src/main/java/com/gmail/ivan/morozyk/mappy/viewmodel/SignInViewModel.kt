@@ -4,7 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.gmail.ivan.morozyk.mappy.navigation.NavigationManager
-import com.gmail.ivan.morozyk.mappy.navigation.Screen
+import com.gmail.ivan.morozyk.mappy.navigation.Route
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -37,6 +37,6 @@ class SignInViewModel @Inject constructor(private val navigationManager: Navigat
     }
 
     fun signUp() {
-        navigationManager.navigate(Screen.SignUp)
+        navigationManager.navigate(Route.SignUp)
     }
 }

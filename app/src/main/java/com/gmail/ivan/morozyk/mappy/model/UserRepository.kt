@@ -3,6 +3,7 @@ package com.gmail.ivan.morozyk.mappy.model
 import com.gmail.ivan.morozyk.mappy.extentions.getResult
 import com.gmail.ivan.morozyk.mappy.model.data.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
@@ -40,9 +41,14 @@ class UserRepository @Inject constructor(
         }
     }
 
-    suspend fun addNewUserWithGoogle() {
+    suspend fun addNewUserWithGoogle(googleSignInIdToken: String) {
+        val credential = GoogleAuthProvider.getCredential(googleSignInIdToken, null)
+        firebaseAuth.signInWithCredential(credential).await()
+
+        val user = firebaseAuth.currentUser
+        user?.let {
+            val userToAdd = User(email = user.email, name = user.displayName)
+            firestore.collection("users").document(it.uid).set(userToAdd).await()
+        }
     }
 }
-
-private const val CLIENT_ID =
-    "491060353364-dntha4fvmoce2addl0ak9gfkg55nqtql.apps.googleusercontent.com"

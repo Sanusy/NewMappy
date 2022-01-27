@@ -17,8 +17,8 @@ class Navigator @Inject constructor() : NavigationManager, NavigationProvider {
         navController = null
     }
 
-    override fun navigate(screen: Screen, singleTop: Boolean) {
-        navController?.navigate(screen.route) {
+    override fun navigate(route: Route, singleTop: Boolean) {
+        navController?.navigate(route.name) {
             launchSingleTop = singleTop
         }
     }

@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gmail.ivan.morozyk.mappy.R
 import com.gmail.ivan.morozyk.mappy.navigation.NavigationManager
-import com.gmail.ivan.morozyk.mappy.navigation.Screen
+import com.gmail.ivan.morozyk.mappy.navigation.Route
 import com.gmail.ivan.morozyk.mappy.ui.theme.MappyTheme
 import com.gmail.ivan.morozyk.mappy.viewmodel.SignInViewModel
 
@@ -89,7 +89,7 @@ fun LoginScreenPreview() {
     MappyTheme {
         SignInScreen(signInViewModel = SignInViewModel(object : NavigationManager {
 
-            override fun navigate(screen: Screen, singleTop: Boolean) {
+            override fun navigate(route: Route, singleTop: Boolean) {
                 TODO("Not yet implemented")
             }
         }))

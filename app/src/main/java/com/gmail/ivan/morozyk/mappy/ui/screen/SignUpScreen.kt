@@ -1,5 +1,6 @@
 package com.gmail.ivan.morozyk.mappy.ui.screen
 
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -17,10 +18,16 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import com.gmail.ivan.morozyk.mappy.R
+import com.gmail.ivan.morozyk.mappy.util.GetGoogleSignInIdToken
 import com.gmail.ivan.morozyk.mappy.viewmodel.SignUpViewModel
 
 @Composable
 fun SignUpScreen(signUpViewModel: SignUpViewModel) {
+
+    val googleSignInHelper =
+        rememberLauncherForActivityResult(contract = GetGoogleSignInIdToken()) { idToken ->
+            signUpViewModel.signUpViaGoogle(idToken)
+        }
 
     Scaffold(topBar = {
         TopAppBar(title = { Text(text = stringResource(id = R.string.app_name)) })
@@ -74,7 +81,7 @@ fun SignUpScreen(signUpViewModel: SignUpViewModel) {
 
             IconButton(
                 modifier = Modifier.padding(8.dp),
-                onClick = signUpViewModel::signUpViaGoogle
+                onClick = { googleSignInHelper.launch(Unit) }
             ) {
                 Image(
                     painterResource(id = R.drawable.googleg_standard_color_18),

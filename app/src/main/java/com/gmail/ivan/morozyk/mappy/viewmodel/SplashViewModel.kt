@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gmail.ivan.morozyk.mappy.model.UserRepository
 import com.gmail.ivan.morozyk.mappy.navigation.NavigationManager
-import com.gmail.ivan.morozyk.mappy.navigation.Screen
+import com.gmail.ivan.morozyk.mappy.navigation.Route
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,7 +22,7 @@ class SplashViewModel @Inject constructor(
             val user = userRepository.getCurrentUser()
 
             when (user) {
-                null -> navigationManager.navigate(Screen.SignIn, singleTop = true)
+                null -> navigationManager.navigate(Route.SignIn, singleTop = true)
                 else -> Log.d("TAG", "checkAuthorization: Logged in: $user")
             }
         }
