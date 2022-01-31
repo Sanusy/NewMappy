@@ -51,4 +51,8 @@ class UserRepository @Inject constructor(
             firestore.collection("users").document(it.uid).set(userToAdd).await()
         }
     }
+
+    fun signOut() {
+        firebaseAuth.signOut()
+    }
 }

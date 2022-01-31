@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.gmail.ivan.morozyk.mappy.navigation.NavigationProvider
 import com.gmail.ivan.morozyk.mappy.navigation.Route
+import com.gmail.ivan.morozyk.mappy.ui.screen.MapListScreen
 import com.gmail.ivan.morozyk.mappy.ui.screen.SignInScreen
 import com.gmail.ivan.morozyk.mappy.ui.screen.SignUpScreen
 import com.gmail.ivan.morozyk.mappy.ui.screen.SplashScreen
@@ -41,6 +42,9 @@ class MainActivity : ComponentActivity() {
                     }
                     composable(Route.SignUp.name) {
                         SignUpScreen(signUpViewModel = hiltViewModel())
+                    }
+                    composable(Route.MapList.name) {
+                        MapListScreen(viewModel = hiltViewModel())
                     }
                 }
             }
