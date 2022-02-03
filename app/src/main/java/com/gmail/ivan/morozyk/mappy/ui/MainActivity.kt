@@ -9,7 +9,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.gmail.ivan.morozyk.mappy.navigation.NavigationProvider
-import com.gmail.ivan.morozyk.mappy.navigation.Screen
+import com.gmail.ivan.morozyk.mappy.navigation.Route
+import com.gmail.ivan.morozyk.mappy.ui.screen.MapListScreen
 import com.gmail.ivan.morozyk.mappy.ui.screen.SignInScreen
 import com.gmail.ivan.morozyk.mappy.ui.screen.SignUpScreen
 import com.gmail.ivan.morozyk.mappy.ui.screen.SplashScreen
@@ -32,15 +33,18 @@ class MainActivity : ComponentActivity() {
 
                 navigationProvider.attachNavController(navController)
 
-                NavHost(navController = navController, startDestination = Screen.Splash.route) {
-                    composable(Screen.Splash.route) {
+                NavHost(navController = navController, startDestination = Route.Splash.name) {
+                    composable(Route.Splash.name) {
                         SplashScreen(splashViewModel = hiltViewModel())
                     }
-                    composable(Screen.SignIn.route) {
+                    composable(Route.SignIn.name) {
                         SignInScreen(signInViewModel = hiltViewModel())
                     }
-                    composable(Screen.SignUp.route) {
+                    composable(Route.SignUp.name) {
                         SignUpScreen(signUpViewModel = hiltViewModel())
+                    }
+                    composable(Route.MapList.name) {
+                        MapListScreen(viewModel = hiltViewModel())
                     }
                 }
             }

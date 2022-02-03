@@ -6,9 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gmail.ivan.morozyk.mappy.model.UserRepository
 import com.gmail.ivan.morozyk.mappy.navigation.NavigationManager
-import com.gmail.ivan.morozyk.mappy.navigation.Screen
+import com.gmail.ivan.morozyk.mappy.navigation.Route
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -44,12 +46,17 @@ class SignUpViewModel @Inject constructor(
                 )
             }
 
-            navigationManager.navigate(Screen.Splash, singleTop = true)
+            navigationManager.navigate(Route.Splash, singleTop = true)
         }
     }
 
-    fun signUpViaGoogle() {
-
+    fun signUpViaGoogle(googleSignInIdToken: String) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                userRepository.signInWithGoogle(googleSignInIdToken)
+            }
+            navigationManager.navigate(Route.Splash, singleTop = true)
+        }
     }
 }
 

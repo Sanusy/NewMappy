@@ -2,5 +2,5 @@ package com.gmail.ivan.morozyk.mappy.navigation
 
 interface NavigationManager {
 
-    fun navigate(screen: Screen, singleTop: Boolean = false)
+    fun navigate(route: Route, singleTop: Boolean = false)
 }
