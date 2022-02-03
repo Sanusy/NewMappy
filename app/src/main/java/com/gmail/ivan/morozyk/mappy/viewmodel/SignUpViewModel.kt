@@ -53,7 +53,7 @@ class SignUpViewModel @Inject constructor(
     fun signUpViaGoogle(googleSignInIdToken: String) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                userRepository.addNewUserWithGoogle(googleSignInIdToken)
+                userRepository.signInWithGoogle(googleSignInIdToken)
             }
             navigationManager.navigate(Route.Splash, singleTop = true)
         }

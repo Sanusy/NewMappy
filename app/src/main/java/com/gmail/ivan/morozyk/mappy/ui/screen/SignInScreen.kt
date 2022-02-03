@@ -1,5 +1,6 @@
 package com.gmail.ivan.morozyk.mappy.ui.screen
 
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -20,10 +21,18 @@ import com.gmail.ivan.morozyk.mappy.R
 import com.gmail.ivan.morozyk.mappy.navigation.NavigationManager
 import com.gmail.ivan.morozyk.mappy.navigation.Route
 import com.gmail.ivan.morozyk.mappy.ui.theme.MappyTheme
+import com.gmail.ivan.morozyk.mappy.util.GetGoogleSignInIdToken
 import com.gmail.ivan.morozyk.mappy.viewmodel.SignInViewModel
 
 @Composable
 fun SignInScreen(signInViewModel: SignInViewModel) {
+
+    val googleSignInHelper = rememberLauncherForActivityResult(
+        contract = GetGoogleSignInIdToken()
+    ) { googleSignInIdToken ->
+        signInViewModel.signInViaGoogle(googleSignInIdToken)
+    }
+
     Scaffold(topBar = {
         TopAppBar(title = { Text(text = stringResource(id = R.string.app_name)) })
     }) {
@@ -58,14 +67,14 @@ fun SignInScreen(signInViewModel: SignInViewModel) {
 
             Button(
                 modifier = Modifier.padding(8.dp),
-                onClick = signInViewModel::logInViaEmailAndPassword
+                onClick = signInViewModel::signInViaEmailAndPassword
             ) {
                 Text(text = stringResource(id = R.string.sign_in_screen_sign_in))
             }
 
             IconButton(
                 modifier = Modifier.padding(8.dp),
-                onClick = signInViewModel::logInViaGoogle
+                onClick = { googleSignInHelper.launch(Unit) }
             ) {
                 Image(
                     painterResource(id = R.drawable.googleg_standard_color_18),
@@ -80,18 +89,5 @@ fun SignInScreen(signInViewModel: SignInViewModel) {
                 Text(text = stringResource(id = R.string.sign_in_screen_sign_up))
             }
         }
-    }
-}
-
-@Preview
-@Composable
-fun LoginScreenPreview() {
-    MappyTheme {
-        SignInScreen(signInViewModel = SignInViewModel(object : NavigationManager {
-
-            override fun navigate(route: Route, singleTop: Boolean) {
-                TODO("Not yet implemented")
-            }
-        }))
     }
 }

@@ -41,14 +41,21 @@ class UserRepository @Inject constructor(
         }
     }
 
-    suspend fun addNewUserWithGoogle(googleSignInIdToken: String) {
+    suspend fun signInViewEmailAndPassword(email: String, password: String) {
+        firebaseAuth.signInWithEmailAndPassword(email, password).await()
+    }
+
+    suspend fun signInWithGoogle(googleSignInIdToken: String) {
         val credential = GoogleAuthProvider.getCredential(googleSignInIdToken, null)
         firebaseAuth.signInWithCredential(credential).await()
 
         val user = firebaseAuth.currentUser
         user?.let {
-            val userToAdd = User(email = user.email, name = user.displayName)
-            firestore.collection("users").document(it.uid).set(userToAdd).await()
+            if (firestore.collection("users").document(it.uid).getResult<User>() == null
+            ) {
+                val userToAdd = User(email = user.email, name = user.displayName)
+                firestore.collection("users").document(it.uid).set(userToAdd).await()
+            }
         }
     }
 
