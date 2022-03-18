@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "491060353364-cht0rmeqn8t3iblnovfsmdfod2m3tk03.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gmail.ivan.morozyk.mappy",
+            "certificate_hash": "fcfc3ce14b50fbb5b86e5eb205d5332a76c2b24d"
+          }
+        },
+        {
           "client_id": "491060353364-v48ks2j9gi3dh08hln0it7fvrnsn1b92.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
