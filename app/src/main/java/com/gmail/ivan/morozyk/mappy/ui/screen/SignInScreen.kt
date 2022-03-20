@@ -15,12 +15,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gmail.ivan.morozyk.mappy.R
-import com.gmail.ivan.morozyk.mappy.navigation.NavigationManager
-import com.gmail.ivan.morozyk.mappy.navigation.Route
-import com.gmail.ivan.morozyk.mappy.ui.theme.MappyTheme
 import com.gmail.ivan.morozyk.mappy.util.GetGoogleSignInIdToken
 import com.gmail.ivan.morozyk.mappy.viewmodel.SignInViewModel
 
@@ -45,7 +41,7 @@ fun SignInScreen(signInViewModel: SignInViewModel) {
                 modifier = Modifier
                     .padding(horizontal = 16.dp, vertical = 8.dp)
                     .fillMaxWidth(),
-                value = signInViewModel.emailState.value,
+                value = signInViewModel.uiState.value.email,
                 onValueChange = signInViewModel::onEmailChanged,
                 leadingIcon = { Icon(Icons.Default.Email, null) },
                 label = { Text(stringResource(id = R.string.sign_in_screen_enter_email)) },
@@ -57,7 +53,7 @@ fun SignInScreen(signInViewModel: SignInViewModel) {
                 modifier = Modifier
                     .padding(horizontal = 16.dp, vertical = 8.dp)
                     .fillMaxWidth(),
-                value = signInViewModel.passwordState.value,
+                value = signInViewModel.uiState.value.password,
                 onValueChange = signInViewModel::onPasswordChanged,
                 leadingIcon = { Icon(Icons.Default.Lock, null) },
                 label = { Text(stringResource(id = R.string.sign_in_screen_enter_password)) },

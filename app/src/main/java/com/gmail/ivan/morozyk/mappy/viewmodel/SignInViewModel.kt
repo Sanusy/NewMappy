@@ -20,26 +20,24 @@ class SignInViewModel @Inject constructor(
 ) :
     ViewModel() {
 
-    private val _emailState = mutableStateOf("")
-    val emailState: State<String>
-        get() = _emailState
+    private val _uiState = mutableStateOf(SignInUiState("", ""))
+    val uiState: State<SignInUiState>
+        get() = _uiState
 
     fun onEmailChanged(email: String) {
-        _emailState.value = email
+        _uiState.value = _uiState.value.copy(email = email)
     }
 
-    private val _passwordState = mutableStateOf("")
-    val passwordState: State<String>
-        get() = _passwordState
-
     fun onPasswordChanged(password: String) {
-        _passwordState.value = password
+        _uiState.value = _uiState.value.copy(password = password)
     }
 
     fun signInViaEmailAndPassword() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                userRepository.signInViewEmailAndPassword(emailState.value, passwordState.value)
+                userRepository.signInViewEmailAndPassword(
+                    uiState.value.email, uiState.value.password
+                )
             }
             navigationManager.navigate(Route.Splash)
         }
@@ -59,3 +57,5 @@ class SignInViewModel @Inject constructor(
         navigationManager.navigate(Route.SignUp)
     }
 }
+
+data class SignInUiState(val email: String, val password: String)
