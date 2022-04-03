@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "491060353364-lgtilpkarb329qdou833hm86omr1doh4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gmail.ivan.morozyk.mappy",
+            "certificate_hash": "a980437979ce7f246dc2513f37912f5295d0143b"
+          }
+        },
+        {
           "client_id": "491060353364-v48ks2j9gi3dh08hln0it7fvrnsn1b92.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
