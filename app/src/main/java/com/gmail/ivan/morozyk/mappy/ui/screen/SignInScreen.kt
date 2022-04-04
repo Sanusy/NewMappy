@@ -17,6 +17,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import com.gmail.ivan.morozyk.mappy.R
+import com.gmail.ivan.morozyk.mappy.ui.widget.ErrorTextField
 import com.gmail.ivan.morozyk.mappy.util.GetGoogleSignInIdToken
 import com.gmail.ivan.morozyk.mappy.viewmodel.SignInViewModel
 
@@ -49,7 +50,7 @@ fun SignInScreen(signInViewModel: SignInViewModel) {
                 singleLine = true,
             )
 
-            TextField(
+            ErrorTextField(
                 modifier = Modifier
                     .padding(horizontal = 16.dp, vertical = 8.dp)
                     .fillMaxWidth(),
@@ -58,7 +59,8 @@ fun SignInScreen(signInViewModel: SignInViewModel) {
                 leadingIcon = { Icon(Icons.Default.Lock, null) },
                 label = { Text(stringResource(id = R.string.sign_in_screen_enter_password)) },
                 visualTransformation = PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                errorText = if (signInViewModel.uiState.value.invalidPassword) stringResource(id = R.string.sign_in_screen_invalid_password) else null,
             )
 
             Button(

@@ -2,6 +2,7 @@ package com.gmail.ivan.morozyk.mappy.model
 
 import com.gmail.ivan.morozyk.mappy.extentions.getResult
 import com.gmail.ivan.morozyk.mappy.model.data.User
+import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.userProfileChangeRequest
@@ -16,13 +17,16 @@ class UserRepository @Inject constructor(
     private val firestore: FirebaseFirestore
 ) {
 
-    suspend fun getCurrentUser(): User? {
+    suspend fun getCurrentUser(): MappyResponse<User> {
         val userId = firebaseAuth.currentUser?.uid
 
         return if (userId != null) {
-            firestore.collection("users")
-                .document(userId).getResult()
-        } else null
+            MappyResponse.Success(
+                firestore.collection("users")
+                    .document(userId).getResult()!!
+            )
+        } else MappyResponse.Error(null)
+
     }
 
     suspend fun addNewUserWithEmailAndPassword(name: String, email: String, password: String) {
@@ -41,8 +45,13 @@ class UserRepository @Inject constructor(
         }
     }
 
-    suspend fun signInViewEmailAndPassword(email: String, password: String) {
-        firebaseAuth.signInWithEmailAndPassword(email, password).await()
+    suspend fun signInViewEmailAndPassword(email: String, password: String): MappyResponse<Unit> {
+        return try {
+            firebaseAuth.signInWithEmailAndPassword(email, password).await()
+            MappyResponse.Success(Unit)
+        } catch (e: FirebaseException) {
+            MappyResponse.Error(e)
+        }
     }
 
     suspend fun signInWithGoogle(googleSignInIdToken: String) {

@@ -4,9 +4,11 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gmail.ivan.morozyk.mappy.model.MappyResponse
 import com.gmail.ivan.morozyk.mappy.model.UserRepository
 import com.gmail.ivan.morozyk.mappy.navigation.NavigationManager
 import com.gmail.ivan.morozyk.mappy.navigation.Route
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,7 +22,7 @@ class SignInViewModel @Inject constructor(
 ) :
     ViewModel() {
 
-    private val _uiState = mutableStateOf(SignInUiState("", ""))
+    private val _uiState = mutableStateOf(SignInUiState())
     val uiState: State<SignInUiState>
         get() = _uiState
 
@@ -34,12 +36,24 @@ class SignInViewModel @Inject constructor(
 
     fun signInViaEmailAndPassword() {
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
+            val response = withContext(Dispatchers.IO) {
                 userRepository.signInViewEmailAndPassword(
                     uiState.value.email, uiState.value.password
                 )
             }
-            navigationManager.navigate(Route.Splash)
+
+            when (response) {
+                is MappyResponse.Success -> {
+                    navigationManager.navigate(Route.Splash)
+                }
+                is MappyResponse.Error -> {
+                    when (response.error) {
+                        is FirebaseAuthInvalidCredentialsException -> {
+                            _uiState.value = _uiState.value.copy(invalidPassword = true)
+                        }
+                    }
+                }
+            }
         }
 
     }
@@ -58,4 +72,8 @@ class SignInViewModel @Inject constructor(
     }
 }
 
-data class SignInUiState(val email: String, val password: String)
+data class SignInUiState(
+    val email: String = "",
+    val password: String = "",
+    val invalidPassword: Boolean = false,
+)
